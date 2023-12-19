@@ -7,7 +7,7 @@ This repository provides an example of how to run a Docker container using a cus
 - `Dockerfile`: Defines the Docker image with a custom non-root user.
 - `docker-compose.yml`: Configuration for running the Docker service.
 - `init`: A bash script to set up environment variables.
-- `test-run`: A script to build and run the Docker container.
+- `test-run`: A script to build and run the Docker container without need of docker-compose
 
 ## Dockerfile
 
@@ -75,26 +75,16 @@ Utilizes the docker build command to create a Docker image. It passes the previo
 Run the Docker Container:
 Executes the docker run command to start a container from the built image. The container is run interactively (-it) and is removed after exit (--rm). The name of the container (container-name) and the image (image-name) are specified in this step. The id command at the end is used to verify the user details inside the container.
 
-Script Content
-bash
-Copy code
-#!/usr/bin/env bash
-
-# Get your host's UID and GID
-export HOST_UID=$(id -u)
-export HOST_GID=$(id -g)
-
-# Build the Docker image
-docker build --build-arg UID=$HOST_UID --build-arg GID=$HOST_GID -t your-image-name .
-
-# Run the Docker container
-docker run -it --rm --name container-name your-image-name id
-
-
 ## Usage
 
 1. Clone the repository.
 2. Run the `init` script to generate a `.env` file with your host's UID and GID.
 3. Use `docker-compose` to build and run the container with the custom user.
+
+```bash
+git clone https://github.com/kambo-1st/CustomUserDockerContainer.git
+./init
+docker-compose run test-user bash
+```
 
 This setup ensures that the Docker container runs with a user that has the same UID and GID as the host user, improving security and file permission management.
