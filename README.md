@@ -60,7 +60,7 @@ HOST_USER_ID=$(id -u)
 ENV
 ```
 
-test-run Script
+## test-run Script (only if you don't have a docker-compose)
 The test-run script serves as a straightforward, command-line method for building and running your Docker container with a custom non-root user. It's an alternative to using docker-compose and is useful for environments or scenarios where Docker Compose might not be preferred or available.
 
 Script Details
