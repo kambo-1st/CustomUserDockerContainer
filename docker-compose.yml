@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  test-user:
+    build:
+      context: .
+      args:
+        UID: ${HOST_USER_ID}
+        GID: ${HOST_GROUP_ID}
+    image: image-name
+
